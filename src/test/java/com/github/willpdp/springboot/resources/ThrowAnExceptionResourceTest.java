@@ -28,7 +28,7 @@ public class ThrowAnExceptionResourceTest {
         final String url = "http://localhost:" + port + THROW_AN_EXCEPTION_RESOURCE;
         final ResponseEntity<String> response = testRestTemplate.getForEntity(url, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("error! com.github.willpdp.springboot.exceptions.handlers.NoGravyException");
+        assertThat(response.getBody()).isEqualTo("error! com.github.willpdp.springboot.exceptions.NoGravyException");
     }
 
 }
