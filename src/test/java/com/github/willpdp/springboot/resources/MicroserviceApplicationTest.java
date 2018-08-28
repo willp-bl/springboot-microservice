@@ -1,4 +1,4 @@
-package com.github.willpdp.springboot;
+package com.github.willpdp.springboot.resources;
 
 import com.github.willpdp.springboot.domain.GravyDto;
 import org.junit.Test;
