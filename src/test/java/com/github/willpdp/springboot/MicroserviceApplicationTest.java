@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
 
+import static com.github.willpdp.springboot.Urls.DOES_THIS_FOOD_NEED_GRAVY_RESOURCE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -26,10 +27,18 @@ public class MicroserviceApplicationTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    public void testGravy() {
-        final ResponseEntity<GravyDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/doesThisFoodNeedGravy?food={food}", GravyDto.class, Map.of("food", "foo"));
+    public void testGravyForMostThings() {
+        final String url = "http://localhost:" + port + DOES_THIS_FOOD_NEED_GRAVY_RESOURCE + "?food={food}";
+        final ResponseEntity<GravyDto> response = testRestTemplate.getForEntity(url, GravyDto.class, Map.of("food", "chips"));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo(new GravyDto("foo"));
+        assertThat(response.getBody()).isEqualTo(new GravyDto("chips", Boolean.TRUE));
+    }
 
+    @Test
+    public void testGravyForIceCream() {
+        final String url = "http://localhost:" + port + DOES_THIS_FOOD_NEED_GRAVY_RESOURCE + "?food={food}";
+        final ResponseEntity<GravyDto> response = testRestTemplate.getForEntity(url, GravyDto.class, Map.of("food", "icecream"));
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(new GravyDto("icecream", Boolean.FALSE));
     }
 }

@@ -14,6 +14,7 @@ public class GravyDto {
         this.food = food;
     }
 
+    // when in doubt, add gravy
     public GravyDto(String food) {
         this(food, Boolean.TRUE);
         this.food = food;
